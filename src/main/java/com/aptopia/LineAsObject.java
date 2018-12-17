@@ -1,3 +1,5 @@
+package com.aptopia;
+
 import java.util.Date;
 
 public class LineAsObject {

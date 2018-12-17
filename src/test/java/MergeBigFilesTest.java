@@ -1,3 +1,4 @@
+import com.aptopia.LineAsObject;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.LineIterator;
 import org.junit.Test;
