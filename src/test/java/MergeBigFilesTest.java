@@ -1,5 +1,4 @@
 import com.google.common.collect.Lists;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.junit.Test;
 
@@ -25,6 +24,7 @@ public class MergeBigFilesTest {
             try (LineIterator it2 = lineIterator(new File(fileName2), "UTF-8")) {
                 LineAsObject firstObject = null;
                 LineAsObject secondObject = null;
+                LineAsObject currentObject = null;
                 boolean firstShouldNext = true;
                 boolean secondShouldNext = true;
                 while (!endOfFirstFile || !endOfSecondFile) {
@@ -48,16 +48,28 @@ public class MergeBigFilesTest {
                         }
                     }
                     LineAsObject objectWithMinValue = calculateObjectWithMinValue(firstObject, secondObject);
+                    if (currentObject == null) {
+                        currentObject = objectWithMinValue;
+                    }
                     if (objectWithMinValue != null) {
-                        resultList.add(objectWithMinValue);
+                        if (currentObject.getDate().equals(objectWithMinValue.getDate())) {
+                            currentObject.setValue(currentObject.getValue() + objectWithMinValue.getValue());
+                        } else {
+                            resultList.add(currentObject);
+                            currentObject = objectWithMinValue;
+                        }
                     }
                     firstShouldNext = (objectWithMinValue == firstObject);
                     secondShouldNext = (objectWithMinValue == secondObject);
-
+                }
+                if (currentObject != null){
+                    resultList.add(currentObject);
                 }
             }
         }
-        resultList.stream().forEach(item -> System.out.println(item.getDate() + ":" + item.getValue()));
+        resultList.stream().
+
+                forEach(item -> System.out.println(item.getDate() + ":" + item.getValue()));
 
     }
 
