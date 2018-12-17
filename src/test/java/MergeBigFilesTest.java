@@ -51,15 +51,8 @@ public class MergeBigFilesTest {
                     if (objectWithMinValue != null) {
                         resultList.add(objectWithMinValue);
                     }
-
-                    if (objectWithMinValue == firstObject) {
-                        firstShouldNext = true;
-                        secondShouldNext = false;
-                    }
-                    if (objectWithMinValue == secondObject) {
-                        firstShouldNext = false;
-                        secondShouldNext = true;
-                    }
+                    firstShouldNext = (objectWithMinValue == firstObject);
+                    secondShouldNext = (objectWithMinValue == secondObject);
 
                 }
             }
