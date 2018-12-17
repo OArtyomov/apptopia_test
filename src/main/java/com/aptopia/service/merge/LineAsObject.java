@@ -1,4 +1,4 @@
-package com.aptopia;
+package com.aptopia.service.merge;
 
 import java.util.Date;
 

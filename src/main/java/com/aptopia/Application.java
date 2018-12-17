@@ -1,5 +1,7 @@
 package com.aptopia;
 
+import com.aptopia.service.merge.FileMerger;
+
 import java.io.IOException;
 import java.text.ParseException;
 
